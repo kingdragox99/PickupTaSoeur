@@ -7,7 +7,7 @@
 - Express Js
 - EJS
 - Socket.io
-- tailwind
+- Tailwind
 
 ### NPM PACK
 
