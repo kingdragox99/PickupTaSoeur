@@ -1,45 +1,45 @@
 const express = require("express");
-const mongoose = require("mongoose");
+var https = require("https");
+const fs = require("fs");
+const dotenv = require("dotenv").config();
 const steam = require("steam-login");
 const Router = require("./routes/routes");
-const dbConnect = require("./config/db");
-const steamLog = require("./config/steamlog");
 
-const port = 3000;
+const port = 3080;
+const oneDay = 1000 * 60 * 60 * 24;
 
 const app = express();
 
-app.use(express.json());
-
-mongoose.connect(dbConnect, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function () {
-  console.log("Connected successfully");
-});
+app.set("view engine", "ejs");
 
 app.use(
   require("express-session")({
+    cookie: { maxAge: oneDay },
     resave: false,
     saveUninitialized: false,
-    secret: "a secret",
+    secret: "am i a god ?",
   })
 );
 
 app.use(
   steam.middleware({
-    realm: "http://localhost:" + port + "/",
-    verify: "http://localhost:" + port + "/verify",
-    apiKey: steamLog,
+    realm: "https://localhost:" + port + "/",
+    verify: "https://localhost:" + port + "/verify",
+    apiKey: process.env.STEAM_API,
   })
 );
 
 app.use(Router);
 
-app.listen(port, () => {
-  console.log("Server is running at port " + port);
-});
+https
+  .createServer(
+    {
+      key: fs.readFileSync("ssl/key.pem"),
+      cert: fs.readFileSync("ssl/cert.pem"),
+    },
+    app
+  )
+  .listen(port, () => {
+    console.log("Server is running at port " + port);
+    console.log("https://localhost:" + port);
+  });
