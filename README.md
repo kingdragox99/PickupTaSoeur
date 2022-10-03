@@ -48,6 +48,7 @@ and add you steam api key [find here](https://steamcommunity.com/dev/apikey)
 
 ```json
 STEAM_API = "YOUR API KEY"
+TRN_API_KEY = "YOUR API KEY"
 ```
 
 ```bash
