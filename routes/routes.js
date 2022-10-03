@@ -3,35 +3,10 @@ const userModel = require("../models/models");
 const steam = require("steam-login");
 const app = express();
 
-app.post("/add_user", async (request, response) => {
-  const user = new userModel(request.body);
-
-  try {
-    await user.save();
-    response.send(user);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
-
-app.get("/users", async (request, response) => {
-  const users = await userModel.find({});
-
-  try {
-    response.send(users);
-  } catch (error) {
-    response.status(500).send(error);
-  }
-});
-
 app.get("/", function (req, res) {
-  res
-    .send(
-      req.user == null
-        ? "not logged in"
-        : "hello " + req.user.username + " " + req.user.steamid
-    )
-    .end();
+  res.render("pages/index", {
+    user: req.user,
+  });
 });
 
 app.get("/authenticate", steam.authenticate(), function (req, res) {
@@ -46,6 +21,12 @@ app.get("/verify", steam.verify(), function (req, res) {
 app.get("/logout", steam.enforceLogin("/"), function (req, res) {
   req.logout();
   res.redirect("/");
+});
+
+app.get("/test", function (req, res) {
+  res.render("pages/index", {
+    user: req.user,
+  });
 });
 
 module.exports = app;
