@@ -35,15 +35,12 @@ app.get("/logout", steam.enforceLogin("/"), function (req, res) {
 // test link need to be deleted after for prod
 
 app.get("/test", function (req, res) {
-  res.render("pages/index", {
-    user: req.user,
-    kd: null,
-  });
+  res.render("pages/test", {});
 });
 
 //fetch test
 
-app.get("/testee", async (req, res) => {
+app.get("/csgo-api-mm", async (req, res) => {
   const steamid = () => {
     if (!req.user) {
       return "null";
