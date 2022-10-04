@@ -18,7 +18,6 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use("/assets", express.static("assets"));
 
-
 // set sessions cockies and time
 
 app.use(
@@ -49,8 +48,9 @@ app.use(Router);
 https
   .createServer(
     {
-      key: fs.readFileSync("ssl/key.pem"),
-      cert: fs.readFileSync("ssl/cert.pem"),
+      key: fs.readFileSync("ssl/private.key"),
+      cert: fs.readFileSync("ssl/certificate.crt"),
+      ca: fs.readFileSync("ssl/ca_bundle.crt"), // can be remove if you need
     },
     app
   )
