@@ -11,13 +11,9 @@
     <%- include('../layouts/header') %>
     <main class="text-gray-400 bg-gray-900 body-font">
       <div class="flex flex-col items-center justify-center">
-        <% if(user == null){ %>
-        <h1 class="text-2xl">not login</h1>
-        <% } else{ %> <img src="<%= user.avatar.large %>" />
-        <h1 class="text-2xl">Salut <%=user.username%></h1>
-        <h1 class="text-2xl">T'on steam id est <%=user.steamid%></h1>
+        <% if(user == null){ %> <% } else{ %>
+        <p class="text-center">T'on steam id est <%=user.steamid%></p>
         <% } %>
-        <h1><%=kd%></h1>
       </div>
     </main>
     <%- include('../layouts/footer') %>
