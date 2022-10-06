@@ -2,7 +2,10 @@
   <div
     class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
   >
-    <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+    <a
+      href="/"
+      class="flex title-font font-medium items-center text-white mb-4 md:mb-0"
+    >
       <% if(user == null){ %>
       <img
         src="https://static.vecteezy.com/system/resources/previews/004/608/408/original/chicken-mascot-for-e-sport-logo-template-vector.jpg"
@@ -15,7 +18,7 @@
         src="<%= user.avatar.large %>"
         class="w-10 h-10 text-white rounded-full"
       />
-      <span class="ml-3 text-xl">Salut <%=user.username%></span>
+      <span class="ml-3 text-xl">Hi <%=user.username%></span>
       <% } %>
     </a>
 
