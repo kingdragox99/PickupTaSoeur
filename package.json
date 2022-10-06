@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "dev-css": "postcss styles/tailwind.css -o public/assets/style.css -w",
-    "build-css": "NODE_ENV=production tailwindcss build -i styles/tailwindcss.css -o public/assets/style.css"
+    "dev-css": "postcss public/assets/style/tailwind.css -o public/assets/style/style.css -w",
+    "build-css": "NODE_ENV=production tailwind build -i public/assets/style/tailwind.css -o public/assets/style/style.css"
   },
   "author": "Dragolelele",
   "license": "ISC",
