@@ -1,10 +1,12 @@
 <div>
   <div id="warn"></div>
+  <% if(user == null){ %> <% } else{ %>
   <button
     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
     id="room"
   >
     create room
   </button>
+  <% } %>
   <ul></ul>
 </div>
