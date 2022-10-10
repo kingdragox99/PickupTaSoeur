@@ -5,12 +5,6 @@ const fetch = require("node-fetch");
 const dotenv = require("dotenv").config();
 const uuid = require("uuid");
 
-// socket io lunch
-var io = require("socket.io")(1337, {
-  cors: {
-    origin: "*",
-  },
-});
 
 // main route
 
@@ -77,48 +71,6 @@ app.get("/csgo-api-mm", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-});
-
-// TEST socket io
-// connect socket io
-io.on("connection", (socket) => {
-  socket.on("debug", (test) => {
-    console.log("it's work");
-  });
-
-  socket.on("login", (user) => {
-    socket.id = user;
-    if (user == null) {
-      console.log(`Anonymous just connect`);
-    } else {
-      console.log(`User ${user} just connect`);
-      // room creation
-      let roomcount = 0;
-      socket.on("create room server", (room) => {
-        if (!roomcount == 1) {
-          roomcount++;
-          const idroom = uuid.v4();
-          console.log(`${socket.id} create room id ${idroom}`);
-          io.emit(
-            "create room client",
-            `${idroom} create by ${socket.id}`,
-            idroom
-          );
-        } else {
-          io.emit("warning", `You can only create one room`);
-        }
-      });
-    }
-    // connection to room
-
-    socket.on("join", function (data) {
-      socket.room = data;
-      socket.join(data);
-      console.log(socket.room);
-      console.log(socket.id);
-      socket.emit("debug client", "it's work");
-    });
-  });
 });
 
 // 404
