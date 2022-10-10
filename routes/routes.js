@@ -5,12 +5,6 @@ const fetch = require("node-fetch");
 const dotenv = require("dotenv").config();
 const uuid = require("uuid");
 
-// socket io lunch
-var io = require("socket.io")(1337, {
-  cors: {
-    origin: "*",
-  },
-});
 
 // main route
 
@@ -22,47 +16,11 @@ app.get("/", function (req, res) {
   });
 });
 
-// TEST socket io
-
 // room id url
 
 app.get("/room/:id", function (req, res) {
   res.render("pages/room", {
     user: req.user,
-  });
-});
-
-// connect socket io
-io.on("connection", (socket) => {
-  console.log("User connect " + socket.id);
-
-  socket.on("debug", (test) => {
-    console.log("it's work");
-  });
-
-  // room creation
-  let roomcount = 0;
-  socket.on("create room server", (room) => {
-    if (!roomcount == 1) {
-      roomcount++;
-      socket.room = uuid.v4();
-      console.log(`${socket.id} create room id ${socket.room}`);
-      io.emit(
-        "create room client",
-        `${socket.room} create by ${socket.id}`,
-        socket.room
-      );
-    } else {
-      io.emit("allready created client", `You can only create one room`);
-    }
-  });
-
-  // connection to room
-
-  socket.on("roomid", async function (data) {
-    socket.room = data.id;
-    console.log(socket.room);
-    socket.join(data.id);
   });
 });
 
