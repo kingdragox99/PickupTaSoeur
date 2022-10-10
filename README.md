@@ -7,19 +7,21 @@
 - Express Js
 - EJS
 - Socket.io
-- Tailwind
+- Tailwind css
 
 ### NPM PACK
 
 - dotenv
 - Steam Login
 - Express session
+- node fetch
+- uuid
 
 ### to do
 
 - Transport EJS to Vue
 - Fetch lvl faceit and MatchMaking rank
-- Make room
+- Make room [x]
 - Make a random capt
 - Pick Player
 - Veto map
