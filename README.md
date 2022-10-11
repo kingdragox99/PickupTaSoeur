@@ -49,6 +49,10 @@ need to make a .env
 and add you steam api key [find here](https://steamcommunity.com/dev/apikey)
 
 ```json
+PORT_HTTP = "80"
+PORT_HTTPS = "8080"
+PORT_WS = "WEBSOCKET PORT"
+URL = "URL OR LOCALHOST"
 STEAM_API = "YOUR API KEY"
 TRN_API_KEY = "YOUR API KEY"
 ```

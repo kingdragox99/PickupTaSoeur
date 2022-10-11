@@ -1,10 +1,11 @@
 {
   "name": "server-pickuptasoeur",
-  "version": "1.0.0",
+  "version": "1.0.0a",
   "description": "Node server for pickuptasoeur.fr",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "dev-css": "postcss public/assets/style/tailwind.css -o public/assets/style/style.css -w",
     "build-css": "NODE_ENV=production tailwind build -i public/assets/style/tailwind.css -o public/assets/style/style.css"
   },

@@ -12,9 +12,9 @@ const uuid = require("uuid");
 
 // usefull const you can change
 
-const url = "localhost:"; // you need to change for deploy
-const port_http = 3000;
-const port_https = 3080;
+const url = process.env.URL; // you need to change for deploy
+const port_http = process.env.PORT_HTTP;
+const port_https = process.env.PORT_HTTPS;
 const oneDay = 1000 * 60 * 60 * 24;
 
 // Render ejs + Tailwind + js
@@ -51,7 +51,7 @@ app.use(Router);
 //use socket io
 
 // socket io lunch
-var io = require("socket.io")(1337, {
+var io = require("socket.io")(process.env.PORT_WS, {
   cors: {
     origin: "*",
   },
