@@ -58,7 +58,9 @@ socket.on("connect", function () {
         document.getElementById(room[i].id).appendChild(btnDeleted);
 
         btnDeleted.onclick = () => {
-          socket.emit("delete room", room[i].id);
+          socket.emit("delete room", {
+            id: room[i].id,
+          });
           location.reload();
         };
       }

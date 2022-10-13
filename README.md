@@ -7,19 +7,21 @@
 - Express Js
 - EJS
 - Socket.io
-- Tailwind
+- Tailwind css
 
 ### NPM PACK
 
 - dotenv
 - Steam Login
 - Express session
+- node fetch
+- uuid
 
 ### to do
 
 - Transport EJS to Vue
 - Fetch lvl faceit and MatchMaking rank
-- Make room
+- Make room [x]
 - Make a random capt
 - Pick Player
 - Veto map
@@ -47,6 +49,10 @@ need to make a .env
 and add you steam api key [find here](https://steamcommunity.com/dev/apikey)
 
 ```json
+PORT_HTTP = "80"
+PORT_HTTPS = "8080"
+PORT_WS = "WEBSOCKET PORT"
+URL = "URL OR LOCALHOST"
 STEAM_API = "YOUR API KEY"
 TRN_API_KEY = "YOUR API KEY"
 ```

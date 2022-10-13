@@ -12,13 +12,41 @@
   <body class="bg-gray-900 body-font">
     <%- include('../layouts/header') %>
     <main class="bg-gray-900 body-font">
-      <h1>ROOM page</h1>
       <div class="flex flex-col items-center justify-center">
-        <% if(user == null){ %> <% } else{ %>
-        <p class="text-center">T'on steam id est <%=user.steamid%></p>
+        <% if(user == null || steamid == null){ %>
+        <section class="text-gray-400 bg-gray-900 body-font">
+          <div class="container px-5 py-24 mx-auto">
+            <div
+              class="lg:w-3/3 flex flex-col sm:flex-row sm:items-center items-start mx-auto"
+            >
+              <h1
+                class="flex-grow sm:pr-16 text-2xl font-medium title-font text-white"
+              >
+                please login to join to join room
+              </h1>
+              <a
+                href="/authenticate"
+                class="flex-shrink-0 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-700 rounded text-lg mt-10 sm:mt-0"
+              >
+                Login
+              </a>
+            </div>
+          </div>
+        </section>
+        <% } else{ %>
+        <h1 class="text-center text-white font-bold text-2xl">Room ID :</h1>
+        <p class="text-center text-white font-bold" id="room-id">Loading...</p>
+        <h1 class="text-center text-white font-bold">
+          Your steam id: <%= steamid %>
+        </h1>
+        <button
+          class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          id="leaveroom"
+        >
+          LEAVE ROOM
+        </button>
         <% } %>
       </div>
-      <p id="room-id">Loading...</p>
     </main>
     <%- include('../layouts/footer') %>
   </body>

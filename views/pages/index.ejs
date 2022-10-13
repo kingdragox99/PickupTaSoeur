@@ -13,9 +13,7 @@
     <%- include('../layouts/header') %>
     <main class="h-[450px] text-gray-400 bg-gray-900 body-font">
       <div class="flex flex-col items-center justify-center">
-        <% if(user == null){ %> <% } else{ %>
-        <p class="text-center">T'on steam id est <%=user.steamid%></p>
-        <% } %>
+        <% if(user == null){ %> <% } else{ %> <% } %>
       </div>
       <%- include('../components/createroom.ejs') %>
     </main>
