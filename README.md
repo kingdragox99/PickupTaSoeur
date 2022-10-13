@@ -5,8 +5,8 @@
 ### Techo
 
 - Express Js
-- EJS
 - Socket.io
+- EJS
 - Tailwind css
 
 ### NPM PACK
