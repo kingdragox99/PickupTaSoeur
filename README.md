@@ -16,6 +16,7 @@
 - Express session
 - node fetch
 - uuid
+- steam id converter
 
 ### to do
 
@@ -25,7 +26,7 @@
 - Make a random capt
 - Pick Player
 - Veto map
-- Lunch server on the ight map with rcon
+- Lunch server on the right map with rcon
 - make css style but la flemme
 
 ### setup
