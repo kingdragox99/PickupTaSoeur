@@ -60,16 +60,21 @@ var io = require("socket.io")(process.env.PORT_WS, {
 // connect socket io
 let roomArray = []; // array des room
 let userGardeFou = []; // garde fous pour créer une room par user
+let match = []; // match array
+const map = [
+  "nuke",
+  "overpass",
+  "dust2",
+  "ancient",
+  "mirage",
+  "vertigo",
+  "inferno",
+];
 
 io.on("connection", (socket) => {
-  // join room index
-  socket.room = "index";
-  socket.join("index");
-
   // login user
   socket.on("login", (user) => {
     socket.id = user;
-    console.log(roomArray);
     // si user = null
     if (user == "null") {
       console.log(`${socket.id} just connected`);
@@ -102,8 +107,6 @@ io.on("connection", (socket) => {
         userGardeFou.push({ user: socket.id, create: true });
       }
 
-      console.log(userGardeFou);
-
       // fetch room on login
       socket.emit("fetch room", roomArray, socket.id);
 
@@ -129,14 +132,12 @@ io.on("connection", (socket) => {
 
           console.log(`${socket.id} create room id ${idroom}`);
           socket.to(socket.id).emit("fetch room", roomArray, socket.id);
-
-          console.log(userGardeFou);
-          console.log(roomArray);
         }
       });
 
       socket.on("delete room", (room) => {
         let newRoomArray = roomArray.filter((data) => data.user != socket.id);
+        let newMatch = match.filter((data) => data.id != room.id);
 
         const newuserGardeFou = userGardeFou.map((obj) => {
           if (obj.user === socket.id) {
@@ -147,16 +148,78 @@ io.on("connection", (socket) => {
         });
         userGardeFou = newuserGardeFou;
         roomArray = newRoomArray;
+        match = newMatch;
       });
     }
-    // connection to room
 
-    socket.on("join", function (data) {
-      socket.room = data;
-      socket.join(data);
-      console.log(`${socket.id} join room ${socket.room}`);
-      socket.to(data).emit("debug client", "it's work");
+    // connection to room
+    socket.on("join", (data) => {
+      console.log(`${data.user} join room ${data.id}`);
+
+      // garde fous double cration dans l'array match
+      const checkMatch = match.some((element) => {
+        if (element.id === data.id) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      // garde fou match verif
+      if (checkMatch === false) {
+        // on cree le match
+        match.push({
+          id: data.id,
+          teamnoteam: [],
+          teamone: [],
+          teamtwo: [],
+          map: [...map.sort()],
+        });
+        socket.emit("fetchmatch", match);
+      }
+
+      // garde fous double cration dans l'array match user
+      const checkMatchTeamNoTeam = match.some((element) => {
+        if (element.teamnoteam !== "undefined") {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      console.log(checkMatchTeamNoTeam);
+
+      socket.on("array checker", (position) => {
+        if (position != null) {
+          // garde fous double cration dans l'array match user
+          const checkMatchUser = match.some((element) => {
+            if (element.teamnoteam.includes(data.user)) {
+              return true;
+            } else {
+              return false;
+            }
+          });
+          console.log(checkMatchUser);
+          if (checkMatchTeamNoTeam == true) {
+            if (checkMatchUser == false) {
+              match[position].teamnoteam.push(socket.id);
+              socket.emit("fetchmatch", match);
+              console.log(match);
+            }
+          }
+
+          socket.on("leave room", (element) => {
+            let userPose = match[position].teamnoteam.indexOf(element.user);
+            if (userPose > -1) {
+              match[position].teamnoteam.splice(userPose, 1);
+              socket.emit("fetchmatch", match);
+            }
+          });
+        }
+      });
     });
+
+    socket.emit("fetchmatch", match);
   });
 
   socket.on("disconnect", () => {

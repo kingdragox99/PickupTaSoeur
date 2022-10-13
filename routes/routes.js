@@ -3,24 +3,38 @@ const steam = require("steam-login");
 const app = express();
 const fetch = require("node-fetch");
 const dotenv = require("dotenv").config();
-const uuid = require("uuid");
-
+const SteamIDConverter = require("steamidconverter");
 
 // main route
 
 app.get("/", function (req, res) {
   res.setHeader("Content-Type", "text/html");
+  const steamid64 = () => {
+    if (req.user == null) {
+      return null;
+    } else {
+      return req.user.steamid;
+    }
+  };
   res.render("pages/index", {
     user: req.user,
-    kd: null,
+    steamid: SteamIDConverter.toSteamID(steamid64()),
   });
 });
 
 // room id url
 
 app.get("/room/:id", function (req, res) {
+  const steamid64 = () => {
+    if (req.user == null) {
+      return null;
+    } else {
+      return req.user.steamid;
+    }
+  };
   res.render("pages/room", {
     user: req.user,
+    steamid: SteamIDConverter.toSteamID(steamid64()),
   });
 });
 
