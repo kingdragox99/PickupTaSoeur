@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../assets/style/style.css" />
+    <link
+      rel="shortcut icon"
+      href="./public/assets/img/favicon.ico"
+      type="image/x-icon"
+    />
     <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
     <script defer src="../js/room.js"></script>
     <title>PickupTaSoeur Room</title>
@@ -36,9 +41,6 @@
         <% } else{ %>
         <h1 class="text-center text-white font-bold text-2xl">Room ID :</h1>
         <p class="text-center text-white font-bold" id="room-id">Loading...</p>
-        <h1 class="text-center text-white font-bold">
-          Your steam id: <%= steamid %>
-        </h1>
         <button
           class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
           id="leaveroom"

@@ -1,4 +1,4 @@
-<header class="text-gray-400 bg-gray-900 body-font">
+<header class="text-gray-400 bg-gray-900 body-font mb-10">
   <div
     class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
   >
@@ -8,10 +8,10 @@
     >
       <% if(user == null){ %>
       <img
-        src="https://static.vecteezy.com/system/resources/previews/004/608/408/original/chicken-mascot-for-e-sport-logo-template-vector.jpg"
-        class="w-10 h-10 text-white rounded-full"
+        src="./public/assets/img/logo.png"
+        class="w-10 h-10 text-white object-contain"
       />
-      <span class="ml-3 text-xl">PickupTaSoeur</span>
+      <span class="ml-3 text-xl">Flash Mate</span>
       <% } else{ %>
 
       <img
@@ -19,6 +19,7 @@
         class="w-10 h-10 text-white rounded-full"
       />
       <span class="ml-3 text-xl" id="username"><%=user.username%></span>
+      <span class="ml-3 text-base"> Your steam id : <%= steamid %> </span>
       <% } %>
     </a>
 

@@ -494,9 +494,6 @@ video {
     max-width: 1536px;
   }
 }
-.static {
-  position: static;
-}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -519,6 +516,18 @@ video {
 }
 .mt-10 {
   margin-top: 2.5rem;
+}
+.mb-\[\] {
+  margin-bottom: ;
+}
+.mb-\[25px\] {
+  margin-bottom: 25px;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mb-10 {
+  margin-bottom: 2.5rem;
 }
 .flex {
   display: flex;
@@ -595,6 +604,10 @@ video {
 .bg-red-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .p-5 {
   padding: 1.25rem;

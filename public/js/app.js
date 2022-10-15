@@ -41,6 +41,7 @@ socket.on("connect", function () {
       a.id = room[i].user;
       const li = document.createElement("li");
       li.id = room[i].id;
+      li.classList.add("mb-8");
       document.querySelector("ul").appendChild(li);
       document.getElementById(room[i].id).appendChild(a);
       console.log(room);
