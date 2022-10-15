@@ -1,4 +1,4 @@
-const socket = io("ws://localhost:1337");
+const socket = io("ws://localhost:3000");
 
 function getUserName() {
   username = document.getElementById("username");

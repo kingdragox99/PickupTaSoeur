@@ -1,5 +1,5 @@
 // socket connect
-const socket = io("ws://localhost:1337");
+const socket = io("ws://localhost:3000");
 
 // get room list room and join
 

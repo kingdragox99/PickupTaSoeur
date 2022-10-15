@@ -9,6 +9,14 @@ var cors = require("cors");
 const steam = require("steam-login");
 const Router = require("./routes/routes");
 const uuid = require("uuid");
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
 
 // usefull const you can change
 
@@ -38,8 +46,8 @@ app.use(
 
 app.use(
   steam.middleware({
-    realm: "https://" + url + port_https + "/",
-    verify: "https://" + url + port_https + "/verify",
+    realm: "http://" + url + port_http + "/",
+    verify: "http://" + url + port_http + "/verify",
     apiKey: process.env.STEAM_API,
   })
 );
@@ -47,15 +55,6 @@ app.use(
 // import router
 
 app.use(Router);
-
-//use socket io
-
-// socket io lunch
-var io = require("socket.io")(process.env.PORT_WS, {
-  cors: {
-    origin: "*",
-  },
-});
 
 // connect socket io
 let roomArray = []; // array des room
@@ -241,7 +240,8 @@ https
   .listen(port_https, () => {
     console.log("Server is running");
     console.log("SSL Run on " + "https://" + url + port_https);
-    console.log("Not secure on " + "http://" + url + port_http);
   });
 
-http.createServer(app).listen(port_http, () => {});
+server.listen(port_http, () => {
+  console.log("Not secure on " + "http://" + url + port_http);
+});
