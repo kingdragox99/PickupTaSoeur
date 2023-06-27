@@ -26,7 +26,7 @@
     "socket.io": "^4.5.2",
     "steam-login": "^0.1.7",
     "steamidconverter": "^1.0.4",
-    "tailwindcss": "^3.1.8",
+    "tailwindcss": "^3.3.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
